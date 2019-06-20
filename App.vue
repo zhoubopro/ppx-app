@@ -17,4 +17,5 @@
   @import "common/css/reset.css";
   @import "common/css/global.css";
   @import "common/css/animate.css";
+  @import "common/css/icon.css";
 </style>

@@ -1,42 +1,29 @@
 <template>
-	<view class="content">
-		<image class="logo" src="/static/logo.png"></image>
-		<view>
-			<text class="title">{{title}}</text>
-		</view>
-	</view>
+  <view class="index-wrap">
+    <IndexList/>
+  </view>
 </template>
 
 <script>
-	export default {
-		data() {
-			return {
-				title: 'Hello'
-			}
-		},
-		onLoad() {
+  import IndexList from '../../components/index-list/index-list';
+  export default {
+    components:{
+      IndexList
+    },
+    data() {
+      return {
+        title: 'Hello'
+      }
+    },
+    onLoad() {
 
-		},
-		methods: {
-
-		}
-	}
+    },
+    methods: {}
+  }
 </script>
 
-<style>
-	.content {
-		text-align: center;
-		height: 400upx;
-	}
+<style lang="less">
+  .index-wrap {
 
-	.logo {
-		height: 200upx;
-		width: 200upx;
-		margin-top: 200upx;
-	}
-
-	.title {
-		font-size: 36upx;
-		color: #8f8f94;
-	}
+  }
 </style>
