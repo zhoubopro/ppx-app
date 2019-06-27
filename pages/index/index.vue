@@ -28,7 +28,6 @@
         </swiper-item>
       </swiper>
     </view>
-
   </view>
 </template>
 
@@ -207,37 +206,18 @@
           }
         ],
         tabBarIndex: 0,
-        tabBars: [
-          {
-            name: '关注',
-            id: 'guanzhu'
-          }, {
-            name: '推荐',
-            id: 'tuijian'
-          }, {
-            name: '体育',
-            id: 'tiyu'
-          }, {
-            name: '热点',
-            id: 'redian'
-          }, {
-            name: '财经',
-            id: 'caijing'
-          }, {
-            name: '娱乐',
-            id: 'yule'
-          }, {
-            name: '军事',
-            id: 'junshi'
-          }, {
-            name: '历史',
-            id: 'lishi'
-          }, {
-            name: '本地',
-            id: 'bendi'
-          }
-        ]
+        tabBars:[]
       }
+    },
+    // 监听搜索框点击事件
+    onNavigationBarSearchInputClicked() {
+      uni.navigateTo({
+        url: '../search/search',
+      });
+    },
+    // 监听原生标题导航按钮点击事件
+    onNavigationBarButtonTap(e) {
+      e.index === 1 && uni.navigateTo({ url: '../release/release' });
     },
     onLoad() {
       // 获取容器高度， 设置列表告诉
@@ -246,23 +226,23 @@
           this.swiperHeight = res.windowHeight - uni.upx2px(100);
         }
       });
+      this.getNavBar();
     },
     methods: {
       // 子组件点击事件，传递回的index
-      bindTabTap(index){
+      bindTabTap(index) {
         this.tabBarIndex = index;
       },
       // 列表滑动事件
-      changeTabBar(e){
+      changeTabBar(e) {
         this.tabBarIndex = e.detail.current;
       },
-      loadMore(index){
-        console.log(index);
-        if(this.newsList[index].loadText !== "上拉加载更多..."){
+      loadMore(index) {
+        if (this.newsList[index].loadText !== "上拉加载更多...") {
           return
         }
-        this.newsList[index].loadText="加载中...";
-        setTimeout(()=> {
+        this.newsList[index].loadText = "加载中...";
+        setTimeout(() => {
           let obj = {
             avatar: '/static/demo/userpic/11.jpg',
             nickname: 'nick name',
@@ -282,14 +262,35 @@
           };
           this.newsList[index].list.push(obj);
         }, 1000);
-        if(this.newsList[index].list.length > 5){
-          this.newsList[index].loadText="没有更多了";
+        if (this.newsList[index].list.length > 5) {
+          this.newsList[index].loadText = "没有更多了";
         }
         else {
-          this.newsList[index].loadText="上拉加载更多...";
+          this.newsList[index].loadText = "上拉加载更多...";
         }
-
-      }
+      },
+      // 获取文章分类
+      async getNavBar(){
+        let [err, res] =await this.$api.get('/postclass');
+        if (!this.$api.errorCheck(err,res)) return;
+        let list = res.data.data.list;
+        let arr = [], arr2 = [];
+        list.map((item, index) => {
+          arr.push({
+            id:item.id,
+            name:item.classname
+          });
+          arr2.push({
+            loadtext:"上拉加载更多",
+            list:[],
+            page:1,
+            firstload:false
+          });
+        });
+        this.tabBars = arr;
+        this.newslist = arr2;
+        // this.tabBars.length > 0 && this.getList();
+      },
     }
   }
 </script>

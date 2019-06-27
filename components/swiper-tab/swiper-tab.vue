@@ -5,7 +5,7 @@
         <block v-for="(item, index) in tabBars" :key="index">
           <view
             class="swiper-tab-list"
-            :class="{'active':tabBarIndex===index}"
+            :class="{'active': tabBarIndex===index}"
             @tap="bindTabBarEvent(index)"
           >
             {{item.name}}
@@ -33,10 +33,9 @@
     },
     methods: {
       // 标签点击事件
-      bindTabBarEvent(i) {
-        // this.tabBarIndex = i;
-        this.$emit('tabTapCallback', i);
-      },
+      bindTabBarEvent(index) {
+        this.$emit('tabTapCallback', index);
+      }
     }
   }
 </script>
@@ -46,7 +45,8 @@
       .uni-swiper-tab {
         border-bottom: 2upx solid #eeeeee;
         .swiper-tab-list {
-          font-weight: bold;
+          width: 104upx;
+          font-weight: 700;
           color: #969696;
           &.active {
             color: #343434;

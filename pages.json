@@ -7,6 +7,7 @@
         // "navigationBarTitleText": "index-app"
         "app-plus": {
           "scrollIndicator": "none",
+          "bounce":"none", //关闭反弹效果
           // 隐藏滚动条
           "titleNView": {
             "searchInput": {
@@ -39,7 +40,12 @@
     },
     {
       "path": "pages/dynamic/dynamic",
-      "style": {}
+      "style" : {
+        "app-plus":{
+          "titleNView":false,
+          "bounce":"none"//关闭反弹效果
+        }
+      }
     },
     {
       "path": "pages/paper/paper",
@@ -58,8 +64,46 @@
       "style": {
         "navigationBarTitleText": "Demo"
       }
+    },
+    {
+      "path": "pages/search/search",
+      "style": {
+        "app-plus": {
+          "scrollIndicator": "none",
+          "titleNView": {
+            "autoBackButton": false,
+            "searchInput": {
+              "align": "left",
+              "backgroundColor": "#F7F7F7",
+              "borderRadius": "4px",
+              "placeholder": "搜索糗事",
+              "placeholderColor": "#CCCCCC"
+            },
+            "buttons": [
+              {
+                "color": "#000000",
+                "colorPressed": "#CCCCCC",
+                "float": "right",
+                "fontSize": "16px",
+                "text": "取消"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "path": "pages/release/release",
+      "style": {
+        "app-plus": {
+          "animationType": "slide-in-bottom",
+          "animationDuration": 200,
+          // 禁止原生导航
+          "titleNView": false
+        }
+      }
     }
-  ],
+    ],
   "globalStyle": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "ppx-app",
