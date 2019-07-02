@@ -7,7 +7,8 @@
         // "navigationBarTitleText": "index-app"
         "app-plus": {
           "scrollIndicator": "none",
-          "bounce":"none", //关闭反弹效果
+          "bounce": "none",
+          //关闭反弹效果
           // 隐藏滚动条
           "titleNView": {
             "searchInput": {
@@ -40,10 +41,11 @@
     },
     {
       "path": "pages/dynamic/dynamic",
-      "style" : {
-        "app-plus":{
-          "titleNView":false,
-          "bounce":"none"//关闭反弹效果
+      "style": {
+        "app-plus": {
+          "titleNView": false,
+          "bounce": "none"
+          //关闭反弹效果
         }
       }
     },
@@ -102,8 +104,35 @@
           "titleNView": false
         }
       }
+    },
+    {
+      "path": "pages/topic-classify/topic-classify",
+      "style": {
+        "navigationBarTitleText": "话题分类",
+        "app-plus": {
+          "bounce": "none"
+        }
+      }
+    },
+    {
+      "path": "pages/topic-detail/topic-detail",
+      "style": {
+        // 开启下拉刷新
+        "enablePullDownRefresh": true,
+        "scrollIndicator": "none",
+        "app-plus": {
+          "titleNView": {
+            "type": "transparent",
+            "buttons": [
+              {
+                "type": "menu"
+              }
+            ]
+          }
+        }
+      }
     }
-    ],
+  ],
   "globalStyle": {
     "navigationBarTextStyle": "black",
     "navigationBarTitleText": "ppx-app",

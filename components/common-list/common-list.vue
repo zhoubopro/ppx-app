@@ -5,7 +5,7 @@
     </view>
     <view class="common-list-right">
       <view class="users u-f-ac u-f-jsb">
-        <view class="u-f-ac">
+        <view class="nickname u-f-ac">
           {{item.nickname}}
           <tagSexAge :sex="getSex" :age="getAge"></tagSexAge>
         </view>
@@ -27,13 +27,11 @@
           </view>
         </template>
         <!-- 分享 -->
-        <template v-else-if="item.mediaType === 'share'">
-          <view class="share u-f-ac" >
-            <image :src="item.mediaUrl"
-                   mode="widthFix" lazy-load></image>
-            <view>{{item.words}}</view>
-          </view>
-        </template>
+        <view class="share u-f-ac" v-else-if="item.mediaType === 'share'">
+          <image :src="item.mediaUrl"
+                 mode="widthFix" lazy-load></image>
+          <view>{{item.words}}</view>
+        </view>
       </view>
       <view class="icon-list u-f-ac u-f-jsb">
         <view class="city">{{item.city}}</view>
@@ -100,16 +98,21 @@
       border-bottom: 2upx solid #EEEEEE;
       padding-bottom: 10upx;
       .users{
+        .nickname{
+          color: #999999;
+          font-size: 32upx;
+        }
         .follow {
+          font-size: 24upx;
           background: #F4F4F4;
           border-radius: 8upx;
-          padding: 10upx 20upx;
+          padding: 0 10upx;
         }
       }
       .words {
-        margin: 40upx 0 30upx;
         font-size: 28upx;
         color: #333333;
+        padding: 12upx 0;
       }
       .media {
         position: relative;

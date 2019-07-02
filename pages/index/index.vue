@@ -10,8 +10,8 @@
         :current="tabBarIndex"
         @change="changeTabBar"
       >
-        <swiper-item v-for="(items, itemIndex) in newsList" :key="itemIndex">
-          <scroll-view scroll-y class="list" @scrolltolower="loadMore(itemIndex)">
+        <swiper-item v-for="(items, itemsIndex) in newsList" :key="itemsIndex">
+          <scroll-view scroll-y class="list" @scrolltolower="loadMore(itemsIndex)">
             <template v-if="items.list.length > 0">
               <!-- 图文列表 -->
               <block v-for="(item, index) in items.list" :key="index">
@@ -19,6 +19,9 @@
               </block>
               <!-- 上拉加载 -->
               <pullUpLoad :contentText="items.loadText"></pullUpLoad>
+            </template>
+            <template v-else-if="!items.firstLoad">
+              <view class="loading u-f-ajc">Loading ...</view>
             </template>
             <template v-else>
               <!-- 无内容默认 -->
@@ -47,164 +50,7 @@
     data() {
       return {
         swiperHeight: 0,
-        newsList: [
-          {
-            loadText: '上拉加载更多...',
-            list: [
-              {
-                avatar: '/static/demo/userpic/12.jpg',
-                nickname: 'hello情歌',
-                isFollow: false,
-                words: '为什么阿斯顿发送到发大撒发阿三撒地方阿斯顿发顺丰的',
-                mediaType: 'img',
-                mediaUrl: '/static/demo/datapic/11.jpg',
-                goodOrBad: {
-                  index: 0,
-                  good: 101,
-                  bad: 10
-                },
-                remarkNum: 1232,
-                shareNum: 10,
-              },
-              {
-                avatar: '/static/demo/userpic/11.jpg',
-                nickname: 'nick name',
-                isFollow: true,
-                words: 'words',
-                mediaType: 'video',
-                mediaUrl: '/static/demo/datapic/10.jpg',
-                longTime: '2:39',
-                playNum: 20,
-                goodOrBad: {
-                  index: 1,
-                  good: 11,
-                  bad: 0
-                },
-                remarkNum: 2,
-                shareNum: 10,
-              }
-            ],
-          },
-          {
-            loadText: '上拉加载更多...',
-            list: [
-              {
-                avatar: '/static/demo/userpic/1.jpg',
-                nickname: 'hello情歌',
-                isFollow: false,
-                words: '为什么阿斯顿发送到发大撒发阿三撒地方阿斯顿发顺丰的',
-                mediaType: 'img',
-                mediaUrl: '/static/demo/datapic/1.jpg',
-                goodOrBad: {
-                  index: 0,
-                  good: 101,
-                  bad: 10
-                },
-                remarkNum: 1232,
-                shareNum: 10,
-              },
-              {
-                avatar: '/static/demo/userpic/2.jpg',
-                nickname: 'nick name',
-                isFollow: true,
-                words: 'words',
-                mediaType: 'video',
-                mediaUrl: '/static/demo/datapic/2.jpg',
-                longTime: '2:39',
-                playNum: 20,
-                goodOrBad: {
-                  index: 1,
-                  good: 11,
-                  bad: 0
-                },
-                remarkNum: 2,
-                shareNum: 10,
-              }
-            ],
-          },
-          {
-            loadText: '上拉加载更多...',
-            list: [
-              {
-                avatar: '/static/demo/userpic/3.jpg',
-                nickname: 'hello情歌',
-                isFollow: false,
-                words: '为什么阿斯顿发送到发大撒发阿三撒地方阿斯顿发顺丰的',
-                mediaType: 'img',
-                mediaUrl: '/static/demo/datapic/3.jpg',
-                goodOrBad: {
-                  index: 0,
-                  good: 101,
-                  bad: 10
-                },
-                remarkNum: 1232,
-                shareNum: 10,
-              },
-              {
-                avatar: '/static/demo/userpic/4.jpg',
-                nickname: 'nick name',
-                isFollow: true,
-                words: 'words',
-                mediaType: 'video',
-                mediaUrl: '/static/demo/datapic/4.jpg',
-                longTime: '2:39',
-                playNum: 20,
-                goodOrBad: {
-                  index: 1,
-                  good: 11,
-                  bad: 0
-                },
-                remarkNum: 2,
-                shareNum: 10,
-              }
-            ],
-          },
-          {
-            loadText: '上拉加载更多...',
-            list: [
-              {
-                avatar: '/static/demo/userpic/5.jpg',
-                nickname: 'hello情歌',
-                isFollow: false,
-                words: '为什么阿斯顿发送到发大撒发阿三撒地方阿斯顿发顺丰的',
-                mediaType: 'img',
-                mediaUrl: '/static/demo/datapic/5.jpg',
-                goodOrBad: {
-                  index: 0,
-                  good: 101,
-                  bad: 10
-                },
-                remarkNum: 1232,
-                shareNum: 10,
-              },
-              {
-                avatar: '/static/demo/userpic/6.jpg',
-                nickname: 'nick name',
-                isFollow: true,
-                words: 'words',
-                mediaType: 'video',
-                mediaUrl: '/static/demo/datapic/6.jpg',
-                longTime: '2:39',
-                playNum: 20,
-                goodOrBad: {
-                  index: 1,
-                  good: 11,
-                  bad: 0
-                },
-                remarkNum: 2,
-                shareNum: 10,
-              }
-            ],
-          },
-          {
-            loadText: '上拉加载更多...',
-            list: []
-          },
-          {
-            loadText: '上拉加载更多...',
-            list: []
-          }
-        ],
+        newsList: [],
         tabBarIndex: 0,
         tabBars:[]
       }
@@ -236,67 +82,99 @@
       // 列表滑动事件
       changeTabBar(e) {
         this.tabBarIndex = e.detail.current;
+        this.getList();
       },
+      // 加载更多
       loadMore(index) {
-        if (this.newsList[index].loadText !== "上拉加载更多...") {
-          return
+        if(this.newsList[index].loadText !== "上拉加载更多") {
+          return false;
         }
+        // 修改状态
         this.newsList[index].loadText = "加载中...";
-        setTimeout(() => {
-          let obj = {
-            avatar: '/static/demo/userpic/11.jpg',
-            nickname: 'nick name',
-            isFollow: true,
-            words: 'words',
-            mediaType: 'video',
-            mediaUrl: '/static/demo/datapic/11.jpg',
-            longTime: '2:39',
-            playNum: 20,
-            goodOrBad: {
-              index: 1,
-              good: 11,
-              bad: 0
-            },
-            remarkNum: 2,
-            shareNum: 10,
-          };
-          this.newsList[index].list.push(obj);
-        }, 1000);
-        if (this.newsList[index].list.length > 5) {
-          this.newsList[index].loadText = "没有更多了";
-        }
-        else {
-          this.newsList[index].loadText = "上拉加载更多...";
-        }
+        this.newsList[this.tabBarIndex].page++;
+        this.getList();
       },
       // 获取文章分类
       async getNavBar(){
-        let [err, res] =await this.$api.get('/postclass');
+        let [err, res] = await this.$api.get('/postclass');
         if (!this.$api.errorCheck(err,res)) return;
         let list = res.data.data.list;
-        let arr = [], arr2 = [];
-        list.map((item, index) => {
-          arr.push({
+        let tabBars = [], newsList = [];
+        list.map(item => {
+          tabBars.push({
             id:item.id,
             name:item.classname
           });
-          arr2.push({
-            loadtext:"上拉加载更多",
-            list:[],
-            page:1,
-            firstload:false
+          newsList.push({
+            loadText: "上拉加载更多",
+            list: [],
+            page: 1,
+            firstLoad: false
           });
         });
-        this.tabBars = arr;
-        this.newslist = arr2;
-        // this.tabBars.length > 0 && this.getList();
+        this.tabBars = tabBars;
+        this.newsList = newsList;
+        this.tabBars.length > 0 && this.getList();
+      },
+      // 获取指定列表
+      async getList(){
+        let currentIndex = this.tabBarIndex;
+        let url = `/postclass/${this.tabBars[this.tabBarIndex].id}/post/${this.newsList[this.tabBarIndex].page}`;
+        let [err,res] = await this.$api.get(url, {}, {token: true});
+        let error = this.$api.errorCheck(err,res,()=>{
+          this.newsList[currentIndex].loadText="上拉加载更多";
+        },()=>{
+          this.newsList[currentIndex].loadText="上拉加载更多";
+        });
+        if (!error) return;
+        let arr = [];
+        let list = res.data.data.list;
+        for (let i = 0; i < list.length; i++) {
+          arr.push(this.__format(list[i]));
+        }
+        this.newsList[currentIndex].list = this.newsList[currentIndex].page > 1 ? this.newsList[currentIndex].list.concat(arr) : arr;
+        this.newsList[currentIndex].firstLoad = true;
+        if (list.length < 10) {
+          this.newsList[currentIndex].loadText="没有更多数据了";
+        }else{
+          this.newsList[currentIndex].loadText="上拉加载更多";
+        }
+        return;
+      },
+      // 格式转化
+      __format(item){
+        return {
+          userId: item.user.id,
+          avatar: item.user.userpic,
+          nickname: item.user.username,
+          isFollow: !!item.user.fens.length,
+          id: item.id,
+          words: item.title,
+          type: "img", // img:图文,video:视频
+          mediaUrl: item.titlepic,
+          video: false,
+          city: item.path,
+          share: !!item.share,
+          goodOrBad:{
+            index: (item.support.length>0) ? (item.support[0].type+1) : 0,//0:没有操作，1:顶,2:踩；
+            good: item.ding_count,
+            bad: item.cai_count,
+          },
+          remarkNum: item.comment_count,
+          shareNum: item.sharenum,
+        }
       },
     }
   }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
   .index-wrap {
-
+    .loading{
+      font-size: 50upx;
+      font-weight: bold;
+      color: #CCCCCC;
+      padding-top: 100upx;
+    }
   }
 </style>

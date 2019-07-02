@@ -1,12 +1,13 @@
 <template>
   <view class="swiper-tab-wrap">
     <view class="uni-tab-bar">
-      <scroll-view scroll-x class="uni-swiper-tab">
+      <scroll-view scroll-x class="uni-swiper-tab" :style="scrollStyle">
         <block v-for="(item, index) in tabBars" :key="index">
           <view
             class="swiper-tab-list"
             :class="{'active': tabBarIndex===index}"
             @tap="bindTabBarEvent(index)"
+            :style="scrollItemStyle"
           >
             {{item.name}}
             <view class="swiper-tab-line"></view>
@@ -29,7 +30,15 @@
       tabBars: {
         type: Array,
         default: []
-      }
+      },
+      scrollStyle: {
+        type: String,
+        default: ''
+      },
+      scrollItemStyle: {
+        type: String,
+        default: ''
+      },
     },
     methods: {
       // 标签点击事件

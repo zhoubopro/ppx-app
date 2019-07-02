@@ -78,7 +78,7 @@
     .nav-tab-bar{
       .nav-tab-bar-items{
         font-size: 32upx;
-        padding: 0 15upx;
+        padding: 0 30upx;
         font-weight: bold;
         color: #969696;
         .nav-tab-bar-line{
