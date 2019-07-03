@@ -51,7 +51,34 @@
     },
     {
       "path": "pages/paper/paper",
-      "style": {}
+      "style": {
+        // 开启下拉刷新
+        "enablePullDownRefresh": true,
+        "scrollIndicator": "none",
+        "navigationBarTitleText": "小纸条",
+        "app-plus": {
+          "titleNView": {
+            "buttons": [
+              {
+                "color": "#000000",
+                "fontSize": "28px",
+                "colorPressed": "#CCCCCC",
+                "float": "left",
+                "fontSrc": "/static/font/iconfont.ttf",
+                "text": "\ue845"
+              },
+              {
+                "color": "#000000",
+                "fontSize": "28px",
+                "colorPressed": "#CCCCCC",
+                "float": "right",
+                "fontSrc": "/static/font/iconfont.ttf",
+                "text": "\ue684"
+              }
+            ]
+          }
+        }
+      }
     },
     {
       "path": "pages/home/home",
@@ -131,6 +158,33 @@
           }
         }
       }
+    },
+    {
+      "path": "pages/friends/friends",
+      "style": {
+        "app-plus": {
+          "scrollIndicator": "none",
+          "titleNView": {
+            "autoBackButton": false,
+            "searchInput": {
+              "align": "left",
+              "backgroundColor": "#F7F7F7",
+              "borderRadius": "4px",
+              "placeholder": "搜索糗友昵称/糗百ID",
+              "placeholderColor": "#CCCCCC"
+            },
+            "buttons": [
+              {
+                "color": "#000000",
+                "colorPressed": "#CCCCCC",
+                "float": "right",
+                "fontSize": "16px",
+                "text": "取消"
+              }
+            ]
+          }
+        }
+      }
     }
   ],
   "globalStyle": {
@@ -167,7 +221,7 @@
         "pagePath": "pages/paper/paper",
         "iconPath": "static/tabbar/paper.png",
         "selectedIconPath": "static/tabbar/paper-active.png",
-        "text": "纸条"
+        "text": "小纸条"
       },
       {
         "pagePath": "pages/home/home",

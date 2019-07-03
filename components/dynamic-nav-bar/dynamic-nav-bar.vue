@@ -82,12 +82,13 @@
         font-weight: bold;
         color: #969696;
         .nav-tab-bar-line{
-          border-bottom: 5upx solid #FEDE33;
-          border-top: 5upx solid #FEDE33;
-          width: 70upx;
+          border-bottom: 6upx solid #FEDE33;
+          border-top: 6upx solid #FEDE33;
+          width: 74upx;
           border-radius: 20upx;
           position: absolute;
           bottom: 12upx;
+          margin-left: -6upx;
         }
         &.active{
           color: #333333!important;

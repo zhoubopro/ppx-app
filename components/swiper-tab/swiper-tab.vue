@@ -9,8 +9,8 @@
             @tap="bindTabBarEvent(index)"
             :style="scrollItemStyle"
           >
-            {{item.name}}
-            <view class="swiper-tab-line"></view>
+            {{item.name}} {{item.number !== undefined ? item.number : ''}}
+            <view :class="{'swiper-tab-line': line}"></view>
           </view>
         </block>
       </scroll-view>
@@ -39,6 +39,10 @@
         type: String,
         default: ''
       },
+      line: {
+        type: Boolean,
+        default: true
+      }
     },
     methods: {
       // 标签点击事件
@@ -62,8 +66,8 @@
             .swiper-tab-line {
               border-bottom: 6upx solid #FEDE33;
               border-top: 6upx solid #FEDE33;
-              margin: -18upx auto 0;
-              width: 70upx;
+              margin: -20upx auto 0;
+              width: 74upx;
               border-radius: 20upx;
             }
           }

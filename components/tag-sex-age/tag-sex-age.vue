@@ -1,7 +1,8 @@
 <template>
   <view class="tag-sex icon iconfont"
-        :class="[sex===0? 'icon-nan': 'icon-nv']">
-    {{age}}
+        :class="[sex===0? 'icon-nan': 'icon-nv']"
+  >
+    <span>{{age}}</span>
   </view>
 </template>
 
@@ -31,6 +32,10 @@
     line-height: 22upx;
     &.icon-nv {
       background: #FF698D;
+    }
+    span{
+      display: inline-block;
+      padding: 0 4upx;
     }
   }
 
