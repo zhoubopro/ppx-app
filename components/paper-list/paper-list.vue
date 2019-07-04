@@ -2,7 +2,7 @@
 	<view
 		class="paper-list-wrap u-f-ac animated fadeIn fast"
 		:class="{'border-top': index === 0}"
-		@tap="openDetail">
+		@tap="openChat">
 		<image :src="item.avatar" mode="widthFix" lazy-load></image>
 		<view class="paper-list-item">
 			<view class="u-f-ac u-f-jsb item-one">
@@ -42,7 +42,10 @@
 			}
 		},
 		methods:{
-			openDetail(){
+      openChat(){
+			  uni.navigateTo({
+					url: '../../pages/chat/chat'
+				})
 				// let obj = {
 				// 	userid:this.item.userid,
 				// 	username:this.item.username,

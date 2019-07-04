@@ -26,18 +26,17 @@ const gettime = {
   },
   // 获取聊天时间（相差300s内的信息不会显示时间）
   getChatTime(v1, v2) {
-    v1 = v1.toString().length < 13 ? v1 * 1000 : v1;
-    v2 = v2.toString().length < 13 ? v2 * 1000 : v2;
-    if (((parseInt(v1) - parseInt(v2)) / 1000) > 300) {
+    v1 = v1.toString().length < 13 ? v1 * 1000 : v1 * 1;
+    v2 = v2.toString().length < 13 ? v2 * 1000 : v2 * 1;
+    if (((v1 - v2) / 1000) > 300) {
       return this.gettime(v1);
     }
   },
   // 人性化时间格式
   gettime(shorttime) {
-    shorttime = shorttime.toString().length < 13 ? shorttime * 1000 : shorttime;
+    shorttime = shorttime.toString().length < 13 ? shorttime * 1000 : shorttime * 1;
     let now = (new Date()).getTime();
-    let cha = (now - parseInt(shorttime)) / 1000;
-
+    let cha = (now - shorttime) / 1000;
     if (cha < 43200) {
       // 当天
       return this.dateFormat(new Date(shorttime), "{A} {t}:{ii}");

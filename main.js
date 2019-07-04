@@ -5,6 +5,12 @@ Vue.config.productionTip = false
 
 App.mpType = 'app'
 
+import dayJs from 'dayjs';
+import AdvancedFormat from 'dayjs/plugin/advancedFormat' // 按需加载
+
+dayJs.extend(AdvancedFormat);
+Vue.prototype.$dayJs = dayJs;
+
 import * as common from './config/common';
 Vue.prototype.$common = common;
 
