@@ -15,6 +15,10 @@
   justify-content: space-between;
 }
 
+.u-f-jsa {
+  justify-content: space-around;
+}
+
 .u-f1 {
   flex: 1;
 }
