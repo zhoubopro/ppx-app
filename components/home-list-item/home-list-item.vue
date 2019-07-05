@@ -1,7 +1,7 @@
 <template>
   <view class="home-list-item-wrap u-f-ac u-f-jsb animated fadeIn fast"
         hover-class="home-list-hover"
-        @tap="clickevent">
+        @tap="getHomeItem">
     <view class="u-f-ac item-list-icon">
       <view v-if="item.icon"
             class="icon iconfont"
@@ -21,39 +21,55 @@
       },
     },
     methods:{
-      clickevent(){
-        switch (this.item.clicktype){
-          case "navigateTo":
-            if(this.item.url){ uni.navigateTo({ url:this.item.url}); }
-            break;
-          case "switchTab":
-            if(this.item.url){ uni.switchTab({url:this.item.url}) }
-            break;
-          case "clear":
-            uni.showModal({
-              title: '提示',
-              content: '是否要清除缓存？',
-              confirmText: '立刻清除',
-              success: res => {
-                if(res.confirm){
-                  uni.clearStorage();
-                  uni.showToast({ title: '清除缓存成功！'});
-                  this.User.logout(false)
-                }
-              },
-            });
-            break;
-          case "bind":
-            if (this.User.userbind[this.item.provider]) return;
-            this.bindother();
-            break;
-          case "nothing":
-            uni.showToast({ title: '更新中...', icon: 'none' });
-            break;
-          case "update":
-            this.lib.Update(true);
-            break;
-        }
+      getHomeItem(){
+        this.item.type === 'navigateTo' && this.item.url ? uni.navigateTo({ url:this.item.url}): '';
+        this.item.type === 'switchTab' && this.item.url ? uni.switchTab({ url:this.item.url}): '';
+        this.item.type === 'clear' ? uni.showModal({
+          title: '提示',
+          content: '是否要清除缓存？',
+          confirmText: '立刻清除',
+          success: res => {
+            if(res.confirm){
+              uni.clearStorage();
+              uni.showToast({ title: '清除缓存成功！'});
+              this.User.logout(false)
+            }
+          },
+        }) : '';
+        // switch (this.item.clicktype){
+        //   case "navigateTo":
+        //     if(this.item.url){
+        //       uni.navigateTo({ url:this.item.url});
+        //     }
+        //     break;
+        //   case "switchTab":
+        //     if(this.item.url){ uni.switchTab({url:this.item.url}) }
+        //     break;
+        //   case "clear":
+        //     uni.showModal({
+        //       title: '提示',
+        //       content: '是否要清除缓存？',
+        //       confirmText: '立刻清除',
+        //       success: res => {
+        //         if(res.confirm){
+        //           uni.clearStorage();
+        //           uni.showToast({ title: '清除缓存成功！'});
+        //           this.User.logout(false)
+        //         }
+        //       },
+        //     });
+        //     break;
+        //   case "bind":
+        //     if (this.User.userbind[this.item.provider]) return;
+        //     this.bindother();
+        //     break;
+        //   case "nothing":
+        //     uni.showToast({ title: '更新中...', icon: 'none' });
+        //     break;
+        //   case "update":
+        //     this.lib.Update(true);
+        //     break;
+        // }
       },
       // 绑定第三方登录
       bindother(){

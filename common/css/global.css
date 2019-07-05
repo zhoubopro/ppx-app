@@ -26,3 +26,30 @@
 .u-f-column {
   flex-direction: column;
 }
+
+/* 全局按钮 */
+.user-btn{
+  width: 100% !important;
+  margin: 20upx 0 !important;
+  padding: 20upx 0 !important;
+  color: #333333 !important;
+  background: #FFE933 !important;
+  font-size: 24upx !important;
+}
+
+.user-btn:after{
+  border: none;
+}
+
+.user-btn-disable{
+  background: #F4F4F4 !important;
+  color: #909090 !important;
+}
+
+.user-btn-disable:after{
+  border: 2upx solid #EEEEEE;
+}
+
+.common-input{
+  border-bottom: 2upx solid #F4F4F4;
+}

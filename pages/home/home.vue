@@ -59,14 +59,16 @@
           { name:"粉丝", num: 0 },
         ],
         list:[
-          { icon:"liulan",name:"浏览历史",clicktype:"navigateTo",url:"/pages/user-history/user-history"},
-          { icon:"huiyuanvip",name:"糗百认证",clicktype:"nothing",url:"" },
-          { icon:"keyboard",name:"审核糗事",clicktype:"nothing",url:"" },
+          { icon:"liulan",name:"浏览历史",type:"navigateTo",url:"/pages/user-history/user-history"},
+          { icon:"huiyuanvip",name:"糗百认证",type:"nothing",url:"" },
+          { icon:"keyboard",name:"审核糗事",type:"nothing",url:"" },
         ]
       };
     },
     onNavigationBarButtonTap(e) {
-      e.index === 0 ? this.$common.showTipsModel('我的菜单') : '';
+      e.index === 0 ? uni.navigateTo({
+        url: '../user-set/user-set'
+      }) : '';
       // this.User.navigate({
       //   url: '../user-set/user-set',
       // });

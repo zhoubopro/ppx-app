@@ -236,6 +236,57 @@
           }
         }
       }
+    },
+    {
+      "path": "pages/user-set/user-set",
+      "style": {
+        "navigationBarTitleText": "设置"
+      }
+    },
+    {
+      "path": "pages/user-update-password/user-update-password",
+      "style": {
+        "navigationBarTitleText": "修改密码",
+        "app-plus": {
+          "scrollIndicator": "none"
+        }
+      }
+    },
+    {
+      "path": "pages/user-update-email/user-update-email",
+      "style": {
+        "navigationBarTitleText": "更换绑定邮箱",
+        "app-plus": {
+          "scrollIndicator": "none"
+        }
+      }
+    },
+    {
+      "path": "pages/user-update-info/user-update-info",
+      "style": {
+        "navigationBarTitleText": "个人资料",
+        "app-plus": {
+          "scrollIndicator": "none"
+        }
+      }
+    },
+    {
+      "path": "pages/user-help/user-help",
+      "style": {
+        "navigationBarTitleText": "意见反馈",
+        "app-plus": {
+          "scrollIndicator": "none"
+        }
+      }
+    },
+    {
+      "path": "pages/user-about/user-about",
+      "style": {
+        "navigationBarTitleText": "🐣 关于糗百",
+        "app-plus": {
+          "scrollIndicator": "none"
+        }
+      }
     }
   ],
   "globalStyle": {

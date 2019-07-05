@@ -1,3 +1,30 @@
+/**
+ * 表单提交验证
+ * @param fields
+ * @returns {boolean}
+ */
+function isValid(fields) {
+  let flag = true;
+  if (typeof fields === 'object' && fields.length > 0) {
+    fields.filter((item, index) => {
+      if (item.value === '' && item.type === 'input') {
+        this.showTipsModel(item.label);
+        flag = false;
+      }
+      else if (Array.isArray(item.value) && item.type === 'password') {
+        flag = item.value[0] === item.value[1] ? true : false;
+        flag ? '' : this.showTipsModel(item.label);
+      }
+      else if (item.reg) {
+        flag = item.reg.test(item.value) ? true : false;
+        flag ? '' : this.showTipsModel(item.regLabel)
+      }
+    });
+  }
+  return flag;
+}
+
+
 function getSystemInfo() {
   // return uni.getSystemInfo({
   //   success(res){
@@ -14,11 +41,11 @@ function getSystemInfo() {
 }
 
 // 操作提示信息
-function showTipsModel(msg = '提示框', callback = function () {
+function showTipsModel(msg = '提示框', icon = 'none', callback = function () {
 }) {
   uni.showToast({
     title: msg,
-    icon: 'none',
+    icon: icon,
     duration: 2000,
   });
   setTimeout(function () {
@@ -26,6 +53,14 @@ function showTipsModel(msg = '提示框', callback = function () {
   }, 2000);
 }
 
+/**
+ *
+ * @param msg
+ * @param mask
+ * @param success
+ * @param fail
+ * @param complete
+ */
 function showLoading(msg = 'Loading...', mask = true, success = function () {
 }, fail = function () {
 }, complete = function () {
@@ -50,6 +85,7 @@ function hideLoading() {
 }
 
 export {
+  isValid,
   getSystemInfo,
   showTipsModel,
   showLoading,

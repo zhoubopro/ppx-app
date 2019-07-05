@@ -14,6 +14,9 @@ Vue.prototype.$dayJs = dayJs;
 import * as common from './config/common';
 Vue.prototype.$common = common;
 
+import * as regular from './config/regular';
+Vue.prototype.$regular = regular;
+
 import request from "./config/request.js";
 Vue.prototype.$api = request;
 

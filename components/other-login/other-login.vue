@@ -37,8 +37,8 @@
           },
           {
             name: '支付宝登录',
-            icon: 'weixin',
-            id: 'alipay'
+            icon: 'sousuo',
+            // id: 'sousuo'
           },
         ]
       }
@@ -169,8 +169,8 @@
       &.icon-xinlangweibo{
         background: #FC7729;
       }
-      &.icon-alipay{
-        background: #2CAEFB;
+      &.icon-sousuo{
+        background: deeppink;
       }
     }
   }
