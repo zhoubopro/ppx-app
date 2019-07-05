@@ -15,7 +15,7 @@
             <template v-if="items.list.length > 0">
               <!-- 图文列表 -->
               <block v-for="(item, index) in items.list" :key="index">
-                <IndexList :items="item"/>
+                <IndexList :item="item"/>
               </block>
               <!-- 上拉加载 -->
               <pullUpLoad :contentText="items.loadText"></pullUpLoad>

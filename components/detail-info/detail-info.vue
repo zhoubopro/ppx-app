@@ -1,5 +1,5 @@
 <template>
-  <view class="index-list-wrap">
+  <view class="detail-info-wrap">
     <view class="list-item animated fadeIn fast">
       <view class="release-user u-f-ac u-f-jsb">
         <view class="avatar">
@@ -10,12 +10,12 @@
           + 关注
         </view>
       </view>
-      <view class="words" @tap="openDetail">
+      <view class="words">
         {{item.words}}
       </view>
       <view class="media u-f-ajc">
         <!-- 图片 -->
-        <image @tap="openDetail" mode="widthFix" :src="item.mediaUrl" lazy-load></image>
+        <image mode="widthFix" :src="item.mediaUrl" lazy-load></image>
         <!-- 视频  -->
         <template v-if="item.mediaType === 'video'">
           <view class="icon iconfont icon-bofang play-btn"></view>
@@ -55,12 +55,6 @@
       }
     },
     methods:{
-      // 进入详情页
-      openDetail(){
-        uni.navigateTo({
-          url: '../../pages/detail/detail?detailData='+JSON.stringify(this.item),
-        });
-      },
       followEvent(){
         console.log('followEvent')
       }
@@ -69,7 +63,7 @@
 </script>
 
 <style lang="less" scoped>
-  .index-list-wrap {
+  .detail-info-wrap {
     margin: 20upx;
     border-bottom: 2upx solid #EEEEEE;
     .list-item {

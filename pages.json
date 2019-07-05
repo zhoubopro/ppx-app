@@ -206,6 +206,23 @@
           }
         }
       }
+    },
+    {
+      "path": "pages/detail/detail",
+      "style": {
+        "navigationBarTitleText": "🐣 糗事百科",
+        "app-plus": {
+          "scrollIndicator": "none",
+          "bounce": "none",
+          "titleNView": {
+            "buttons": [
+              {
+                "type": "menu"
+              }
+            ]
+          }
+        }
+      }
     }
   ],
   "globalStyle": {
