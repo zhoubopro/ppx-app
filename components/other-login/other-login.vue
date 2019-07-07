@@ -87,7 +87,10 @@
         });
       },
       // 登录
-      // tologin(provider) {
+      tologin(provider) {
+        uni.navigateTo({
+          url: 'pages/login/login'
+        })
       //   uni.login({
       //     provider: provider.id,
       //     success: (res) => {
@@ -135,7 +138,7 @@
       //       console.log('login fail:', err);
       //     }
       //   });
-      // },
+      },
       // async loginEvent(data){
       //   let res = await this.User.login({
       //     url:'/user/otherlogin',
